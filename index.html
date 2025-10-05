@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PLM Workspace</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="app-header__brand">
+        <span class="app-header__badge">PLM</span>
+        <h1>Product Lifecycle Workspace</h1>
+      </div>
+      <p class="app-header__subtitle">
+        Orchestrate your product creation from concept to launch.
+      </p>
+    </header>
+
+    <main>
+      <section class="panel" id="briefing-panel">
+        <header class="panel__header">
+          <h2>Brand Brief</h2>
+          <p>Set the context for the collection you are working on.</p>
+        </header>
+        <form class="briefing-form" id="briefing-form">
+          <div class="form-row">
+            <label>Brand</label>
+            <div class="toggle-group" role="group" aria-label="Brand">
+              <button type="button" data-brand="Mens">Mens</button>
+              <button type="button" data-brand="Womens">Womens</button>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="season">Season</label>
+            <select id="season" required>
+              <option value="" disabled selected>Select a season</option>
+              <option>Spring 2025</option>
+              <option>Summer 2025</option>
+              <option>Fall 2025</option>
+              <option>Holiday 2025</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="department">Department</label>
+            <select id="department" required>
+              <option value="" disabled selected>Select a department</option>
+              <option>Design</option>
+              <option>Development</option>
+              <option>Production</option>
+              <option>Merchandising</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button id="continue-btn" type="submit" disabled>Continue</button>
+          </div>
+        </form>
+        <aside class="briefing-summary" id="briefing-summary" hidden>
+          <h3>Collection Context Locked</h3>
+          <p>Your selections anchor downstream modules. Reopen the brief to adjust.</p>
+          <dl>
+            <div>
+              <dt>Brand</dt>
+              <dd>-</dd>
+            </div>
+            <div>
+              <dt>Season</dt>
+              <dd>-</dd>
+            </div>
+            <div>
+              <dt>Department</dt>
+              <dd>-</dd>
+            </div>
+          </dl>
+          <button class="briefing-summary__edit" type="button" id="edit-brief">Edit Brief</button>
+        </aside>
+      </section>
+
+      <section class="panel panel--hidden" id="workspace-panel" aria-hidden="true">
+        <header class="panel__header">
+          <div>
+            <h2>Workspace</h2>
+            <p>Select a module to manage your product data.</p>
+          </div>
+          <dl class="context-chip" id="selection-summary">
+            <div>
+              <dt>Brand</dt>
+              <dd>-</dd>
+            </div>
+            <div>
+              <dt>Season</dt>
+              <dd>-</dd>
+            </div>
+            <div>
+              <dt>Department</dt>
+              <dd>-</dd>
+            </div>
+          </dl>
+        </header>
+
+        <nav class="module-nav" aria-label="Workspace modules">
+          <button class="module-nav__item" data-module="article">
+            <span>Article Creation</span>
+            <small>Sketches, specs, and milestones</small>
+          </button>
+          <button class="module-nav__item" data-module="materials">
+            <span>Materials Library</span>
+            <small>Fabrics, trims, components</small>
+          </button>
+          <button class="module-nav__item" data-module="colors">
+            <span>Color Library</span>
+            <small>Palette standards &amp; approvals</small>
+          </button>
+          <button class="module-nav__item" data-module="calendar">
+            <span>Season Calendar</span>
+            <small>Track key deliverables</small>
+          </button>
+        </nav>
+
+        <section class="module-board" id="module-content" aria-live="polite"></section>
+      </section>
+    </main>
+
+    <template id="article-template">
+      <article class="module">
+        <header class="module__header">
+          <h3>Article Creation</h3>
+          <p>Monitor style readiness across the development funnel.</p>
+        </header>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Style</th>
+              <th>Category</th>
+              <th>Status</th>
+              <th>Next Milestone</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </article>
+    </template>
+
+    <template id="materials-template">
+      <article class="module">
+        <header class="module__header">
+          <h3>Materials Library</h3>
+          <p>Reference approved textiles and trims.</p>
+        </header>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Material</th>
+              <th>Composition</th>
+              <th>Supplier</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </article>
+    </template>
+
+    <template id="colors-template">
+      <article class="module">
+        <header class="module__header">
+          <h3>Color Library</h3>
+          <p>Align color approvals across brand touchpoints.</p>
+        </header>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Color</th>
+              <th>Code</th>
+              <th>Finish</th>
+              <th>Approval</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </article>
+    </template>
+
+    <template id="calendar-template">
+      <article class="module">
+        <header class="module__header">
+          <h3>Season Calendar</h3>
+          <p>Stay on top of deadlines and deliverables.</p>
+        </header>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Milestone</th>
+              <th>Owner</th>
+              <th>Due Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
